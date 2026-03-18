@@ -11,8 +11,8 @@ export async function generateMetadata() {
     };
   }
   return {
-    title: 'Home | Designer Portfolio',
-    description: 'Welcome to our creative design studio.',
+    title: 'Home | Astroxadv Law Firm',
+    description: 'Astroxadv is a premier law firm delivering trusted legal counsel across corporate, civil, criminal, and family law.',
   };
 }
 
