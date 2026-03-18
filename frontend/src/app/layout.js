@@ -1,19 +1,25 @@
 import "./globals.css";
-import { Inter, Outfit } from "next/font/google";
+import { Inter } from "next/font/google";
+import { Cormorant_Garamond } from "next/font/google";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const outfit = Outfit({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  variable: "--font-cormorant",
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 export const metadata = {
-  title: "Brand Portfolio",
-  description: "Creative Design Portfolio",
+  title: "Astroxadv | Legal Excellence & Advocacy",
+  description:
+    "Astroxadv is a premier law firm delivering trusted legal counsel across corporate, civil, criminal, and family law. Experience excellence in advocacy.",
+  keywords: "law firm, legal services, advocates, Astroxadv, attorneys, legal counsel",
 };
 
 import LayoutWrapper from "@/components/LayoutWrapper";
@@ -21,7 +27,10 @@ import LayoutWrapper from "@/components/LayoutWrapper";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${outfit.variable} antialiased min-h-screen flex flex-col bg-brand-black text-brand-text`} suppressHydrationWarning={true}>
+      <body
+        className={`${inter.variable} ${cormorant.variable} antialiased min-h-screen flex flex-col`}
+        suppressHydrationWarning={true}
+      >
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>

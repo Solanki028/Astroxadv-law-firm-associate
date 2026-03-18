@@ -1,35 +1,245 @@
 @import "tailwindcss";
 
 @theme {
+  /* Law Firm Color Palette */
+  --color-law-navy: #0A1628;
+  --color-law-navy-mid: #1B3A6B;
+  --color-law-navy-light: #243B5E;
+  --color-law-gold: #C9A84C;
+  --color-law-gold-light: #E8C97A;
+  --color-law-gold-dark: #A07830;
+  --color-law-cream: #F8F4EE;
+  --color-law-cream-dark: #EDE8E0;
+  --color-law-white: #FFFFFF;
+  --color-law-text: #1A1A2E;
+  --color-law-muted: #6B7280;
+  --color-law-light: #9CA3AF;
+  --color-law-border: #2A3F5F;
+
+  /* Legacy brand colors for admin (do not remove) */
   --color-brand-red: #990000;
   --color-brand-dark: #0F0F0F;
   --color-brand-black: #000000;
   --color-brand-gray: #1C1C1C;
   --color-brand-text: #EDEDED;
   --color-brand-muted: #A1A1A1;
-  /* Font Improvements */
-  --font-display: var(--font-outfit);
+
+  /* Fonts */
+  --font-display: var(--font-cormorant);
   --font-body: var(--font-inter);
 }
 
 :root {
-  --background: #000000;
-  --foreground: #EDEDED;
+  --background: #0A1628;
+  --foreground: #F8F4EE;
+  scroll-behavior: smooth;
 }
 
+/* ===================== */
+/* BASE STYLES           */
+/* ===================== */
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter), sans-serif;
+  background-color: #F8F4EE;
+  color: #1A1A2E;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-outfit), sans-serif;
-  letter-spacing: -0.01em;
-  /* Slightly tighter for headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cormorant), Georgia, 'Times New Roman', serif;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
 }
+
+/* ===================== */
+/* UTILITY CLASSES       */
+/* ===================== */
+
+/* Gold underline effect */
+.gold-underline {
+  position: relative;
+  display: inline-block;
+}
+.gold-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background-color: #C9A84C;
+}
+.gold-underline-center::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Section label (small uppercase tracking) */
+.section-label {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #C9A84C;
+}
+
+/* Law firm button styles */
+.btn-primary, .btn-outline, .btn-outline-dark {
+  position: relative;
+  overflow: hidden;
+  z-index: 1; /* Establishes stacking context for the pseudo-element */
+  background-color: transparent !important; /* Forces the box-model to be seethrough so images appear */
+}
+
+/* Solid Base layer for btn-primary */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #C9A84C; /* Base Gold color */
+  z-index: -2;
+  transition: opacity 0.4s ease;
+}
+
+/* Fade out base color on hover so image shines through */
+.btn-primary:hover::after {
+  opacity: 0;
+}
+
+/* The Hover Image Mask */
+.btn-primary::before, .btn-outline::before, .btn-outline-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Subtle navy overlay ensuring the law library image shines through clearly */
+  background-image: linear-gradient(rgba(10, 22, 40, 0.45), rgba(10, 22, 40, 0.65)), url('https://images.unsplash.com/photo-1589539148230-0a5fc1f1ae51?q=80&w=600');
+  background-size: cover;
+  background-position: center;
+  z-index: -1; /* Stacked precisely above the base color */
+  opacity: 0;
+  transform: translateY(100%);
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+}
+
+/* Hover Triggers for the Image Reveal */
+.btn-primary:hover::before, .btn-outline:hover::before, .btn-outline-dark:hover::before {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  /* background-color is now managed precisely by ::after layer */
+  color: #0A1628;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+  border: 1px solid #C9A84C;
+}
+.btn-primary:hover {
+  color: #C9A84C; /* Text turns gold to contrast with the dark image overlay */
+  border-color: #C9A84C;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(201, 168, 76, 0.25);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  background-color: transparent;
+  color: #F8F4EE;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+  border: 1px solid #C9A84C;
+}
+.btn-outline:hover {
+  color: #C9A84C;
+  border-color: #C9A84C;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(201, 168, 76, 0.25);
+}
+
+.btn-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  background-color: transparent;
+  color: #0A1628;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+  border: 1px solid #0A1628;
+}
+.btn-outline-dark:hover {
+  color: #C9A84C;
+  border-color: #C9A84C;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(201, 168, 76, 0.25);
+}
+
+/* Section divider */
+.divider-gold {
+  width: 60px;
+  height: 2px;
+  background-color: #C9A84C;
+  margin: 1.5rem 0;
+}
+.divider-gold-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0A1628;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9A84C;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E8C97A;
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+/* Stagger delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }

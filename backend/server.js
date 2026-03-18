@@ -36,20 +36,13 @@ connectDB();
 app.use('/api/content', require('./routes/contentRoutes'));
 app.use('/api/services', require('./routes/serviceRoutes'));
 app.use('/api/contact', require('./routes/contactRoutes'));
-app.use('/api/seo', require('./routes/seoRoutes'));
+// app.use('/api/seo', require('./routes/seoRoutes'));
 app.use('/api/upload', require('./routes/uploadRoutes'));
 app.use('/api/auth', require('./routes/authRoutes'));
-// Testimonials route (inline for now or create file)
-app.get('/api/testimonials', async (req, res) => {
-    try {
-        const testimonials = await require('./models/Testimonial').find().sort('-createdAt');
-        res.json(testimonials);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
+app.use('/api/blogs', require('./routes/blogRoutes'));
+app.use('/api/testimonials', require('./routes/testimonialRoutes'));
 
-app.use('/api/portfolio', require('./routes/portfolioRoutes'));
+// app.use('/api/portfolio', require('./routes/portfolioRoutes'));
 
 app.get('/', (req, res) => {
     res.send('API is running...');

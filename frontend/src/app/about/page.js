@@ -11,8 +11,8 @@ export async function generateMetadata() {
         };
     }
     return {
-        title: 'About Us | Designer Portfolio',
-        description: 'Learn more about our studio and experience.',
+        title: 'About Us | Astroxadv Advocates',
+        description: 'Learn about Astroxadv — a premier law firm dedicated to trusted legal counsel, ethical practice, and exceptional client advocacy.',
     };
 }
 

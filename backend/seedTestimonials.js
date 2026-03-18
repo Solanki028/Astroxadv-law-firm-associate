@@ -1,70 +1,52 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const Testimonial = require('./models/Testimonial');
-const connectDB = require('./config/db');
 
 dotenv.config();
 
-const testimonials = [
+const DUMMY_TESTIMONIALS = [
     {
-        name: "Aarav Patel",
-        role: "CEO, TechFlow India",
-        quote: "The team delivered an exceptional website that perfectly captures our brand identity. Their attention to detail is unmatched.",
+        name: "Rajesh Gupta",
+        role: "CEO, TechVantage Solutions",
+        quote: "Astroxadv provided exceptional counsel during our recent merger. Their precision, dedication, and strategic approach were instrumental in securing a favorable outcome for our company.",
         rating: 5,
-        avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+        isActive: true
     },
     {
-        name: "Diya Sharma",
-        role: "Marketing Director, Aura Trends",
-        quote: "Working with them was a seamless experience. They understood our vision and translated it into a stunning digital reality.",
+        name: "Anita Sharma",
+        role: "Private Client",
+        quote: "I was facing a complex property dispute, and the team at Astroxadv handled my case with immense professionalism and empathy. Highly recommended for civil litigation.",
         rating: 5,
-        avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+        isActive: true
     },
     {
-        name: "Rohan Gupta",
-        role: "Founder, GreenLeaf Startups",
-        quote: "Professional, creative, and timely. I highly recommend their services for anyone looking to elevate their online presence.",
+        name: "Vikram Desai",
+        role: "Founder, Desai Capital",
+        quote: "Their corporate governance advice is unparalleled. We have retained Astroxadv as our primary legal counsel for three years now, and their service has been consistently excellent.",
         rating: 5,
-        avatar: "https://randomuser.me/api/portraits/men/86.jpg"
-    },
-    {
-        name: "Ananya Iyer",
-        role: "Creative Lead, PixelArts",
-        quote: "The design is bold, modern, and user-friendly. Our engagement metrics have skyrocketed since the launch.",
-        rating: 5,
-        avatar: "https://randomuser.me/api/portraits/women/68.jpg"
-    },
-    {
-        name: "Vikram Singh",
-        role: "COO, Estate Ventures",
-        quote: "They went above and beyond to ensure every feature worked perfectly. A truly dedicated team of professionals.",
-        rating: 4,
-        avatar: "https://randomuser.me/api/portraits/men/46.jpg"
-    },
-    {
-        name: "Meera Reddy",
-        role: "Product Manager, InnovateX",
-        quote: "Visually stunning and highly functional. The cms they built makes managing our content a breeze.",
-        rating: 5,
-        avatar: "https://randomuser.me/api/portraits/women/29.jpg"
+        isActive: true
     }
 ];
 
-const seedTestimonials = async () => {
+const seedDB = async () => {
     try {
-        await connectDB();
+        await mongoose.connect(process.env.MONGODB_URI);
+        console.log("MongoDB Connected for Testimonial seeding...");
 
+        // Clear existing testimonials
         await Testimonial.deleteMany({});
-        console.log('Testimonials cleared');
+        console.log("Cleared existing testimonials.");
 
-        await Testimonial.insertMany(testimonials);
-        console.log('Testimonials seeded successfully');
+        // Insert new dummy testimonials
+        const inserted = await Testimonial.insertMany(DUMMY_TESTIMONIALS);
+        console.log(`Inserted ${inserted.length} dummy testimonials.`);
 
+        console.log("Seeding complete! You can press CTRL+C to exit.");
         process.exit();
-    } catch (error) {
-        console.error('Error seeding testimonials:', error);
+    } catch (err) {
+        console.error("Seeding failed:", err);
         process.exit(1);
     }
 };
 
-seedTestimonials();
+seedDB();

@@ -27,11 +27,11 @@ export default function AdminLayout({ children }) {
     const navItems = [
         { name: 'Dashboard', path: '/admin/dashboard' },
         { name: 'About Content', path: '/admin/about' },
-        { name: 'Services', path: '/admin/services' },
-        { name: 'SEO Metadata', path: '/admin/seo' },
+        { name: 'Practice Areas', path: '/admin/services' },
+        { name: 'Blogs', path: '/admin/blogs' },
+        { name: 'Testimonials', path: '/admin/testimonials' },
         { name: 'Messages', path: '/admin/messages' },
         { name: 'Settings', path: '/admin/settings' },
-        { name: 'Portfolio', path: '/admin/portfolio' },
     ];
 
     return (

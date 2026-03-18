@@ -14,6 +14,10 @@ const ServiceCategorySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    detailedContent: {
+        type: String,
+        required: false
+    },
     heroImage: {
         type: String,
         required: false

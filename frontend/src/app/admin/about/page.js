@@ -24,15 +24,16 @@ export default function AdminAbout() {
                 ]);
 
                 if (usRes.data && usRes.data.content) {
-                    if (typeof usRes.data.content === 'string') {
-                        const existingData = usRes.data.content;
-                        // Migration logic: If old 'image' exists and no 'images' array, migrate it
-                        if (existingData.image && (!existingData.images || existingData.images.length === 0)) {
-                            existingData.images = [existingData.image];
-                        }
-                        if (!existingData.images) existingData.images = [];
-                        setAboutUs(existingData);
+                    let existingData = typeof usRes.data.content === 'string' 
+                        ? { text: usRes.data.content, images: [] } 
+                        : { ...usRes.data.content };
+                        
+                    // Migration logic: If old 'image' exists and no 'images' array, migrate it
+                    if (existingData.image && (!existingData.images || existingData.images.length === 0)) {
+                        existingData.images = [existingData.image];
                     }
+                    if (!existingData.images) existingData.images = [];
+                    setAboutUs(existingData);
                 }
 
                 if (heroRes.data && heroRes.data.content) {

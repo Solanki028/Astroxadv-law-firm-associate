@@ -11,8 +11,8 @@ export async function generateMetadata() {
         };
     }
     return {
-        title: 'Contact Us | Designer Portfolio',
-        description: 'Get in touch with us for your design needs.',
+        title: 'Contact Us | Astroxadv Advocates',
+        description: 'Contact Astroxadv for a free legal consultation. Our attorneys are available Mon-Sat to discuss your legal matters.',
     };
 }
 

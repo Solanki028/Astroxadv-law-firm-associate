@@ -11,8 +11,8 @@ export async function generateMetadata() {
         };
     }
     return {
-        title: 'Services | Designer Portfolio',
-        description: 'Explore our range of design services.',
+        title: 'Practice Areas | Astroxadv Advocates',
+        description: 'Explore the full range of legal practice areas at Astroxadv — from corporate and civil law to criminal defense and family law.',
     };
 }
 

@@ -24,6 +24,10 @@ const TestimonialSchema = new mongoose.Schema({
         default: 5,
         min: 1,
         max: 5
+    },
+    isActive: {
+        type: Boolean,
+        default: true
     }
 }, { timestamps: true });
 
